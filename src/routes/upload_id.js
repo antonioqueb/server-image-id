@@ -51,7 +51,7 @@ router.post('/', upload.single('image'), verifyID, async (req, res) => {
     return res.status(500).send({ message: 'Error al procesar la imagen' });
   }
 
-  const imageUrl = `https://cdn-company-images.historiallaboral.com/uploads/${filename}`;
+  const imageUrl = `https://cdn-user-image.historiallaboral.com/uploads/${filename}`;
   res.send({
     imageUrl: imageUrl,
     filename: filename

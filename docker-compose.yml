@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  rfc-uploader:
+    build: .
+    container_name: rfc_uploader_service
+    ports:
+      - "3021:3010"
+    volumes:
+      - id_uploads_data:/usr/src/app/uploads
+    environment:
+      - NODE_ENV=development
+
+  rfc-uploader-nginx:
+    image: nginx:latest
+    container_name: rfc_uploader_nginx
+    ports:
+      - "3022:81"
+    volumes:
+      - ./nginx/nginx_rfc.conf:/etc/nginx/nginx.conf:ro
+      - id_uploads_data:/usr/share/nginx/html/uploads
+    depends_on:
+      - rfc-uploader
+
+  id-uploader:
+    build: .
+    container_name: id_uploader_service
+    ports:
+      - "3023:3011"
+    volumes:
+      - id_uploads_data:/usr/src/app/uploads
+    environment:
+      - NODE_ENV=development
+
+  id-uploader-nginx:
+    image: nginx:latest
+    container_name: id_uploader_nginx
+    ports:
+      - "3024:82"
+    volumes:
+      - ./nginx/nginx_id.conf:/etc/nginx/nginx.conf:ro
+      - id_uploads_data:/usr/share/nginx/html/uploads
+    depends_on:
+      - id-uploader
+
+volumes:
+  id_uploads_data:

@@ -6,6 +6,7 @@
         "start": "node src/index_id.js"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.17.1",
         "multer": "^1.4.3",
         "sharp": "^0.33.4"

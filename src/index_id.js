@@ -1,9 +1,14 @@
-// src/index_id.js
 const express = require('express');
+const cors = require('cors');
 const uploadIDRouter = require('./routes/upload_id');
 
 const app = express();
 const port = 3011;
+
+// Configurar CORS
+app.use(cors({
+  origin: 'https://historiallaboral.com' // Permitir solicitudes desde este dominio
+}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
